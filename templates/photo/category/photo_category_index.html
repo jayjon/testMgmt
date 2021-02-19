@@ -1,0 +1,80 @@
+{% extends "../../base.html" %}
+
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/index">主页</a>
+            </li>
+            <li class="active">
+                <a class="this">图片分类管理</a>
+            </li>
+        </ol>
+
+    </div>
+</div>
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加分类</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="/base/photo_category_add/">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="category_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类描述</label>
+                        <div class="col-sm-6">
+                            <textarea name="description" placeholder="请输入内容" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-6">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>所属分类</th>
+                        <th>分类描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pcl in photo_category_list %}
+                    <tr>
+                        <td>{{ pcl.cate_id }}</td>
+                        <td>{{ pcl.category_name }}</td>
+                        <td>{{ pcl.description }}</td>
+                        <td>
+                            <a href="/base/photo_category_update?cate_id={{ pcl.cate_id }}" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                            <a href="/base/photo_category_delete?cate_id={{ pcl.cate_id }}" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

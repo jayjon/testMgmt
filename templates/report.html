@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block crumbs %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{report.report_name}} 测试报告</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="alert alert-success" role="alert">
+                <strong>Status: </strong>Count: {{report.case_num}} Pass: {{report.pass_num}}
+                Fail: {{report.fail_num}} Error:0
+            </div>
+            <p id='show_detail_line'>
+                <a href="javascript:void(0);" class="label label-default" style="font-size: medium" onclick="showAll();">所有用例</a>
+                <a href="javascript:void(0);" class="label label-success" style="font-size: medium" onclick="showPass();">只看成功</a>
+                <a href="javascript:void(0);" class="label label-warning" style="font-size: medium" onclick="showFail();">只看失败</a>
+                <a href="javascript:void(0);" class="label label-danger" style="font-size: medium" onclick="showError();">只看异常</a>
+            </p>
+         </div>
+        <div class="panel-body">
+            <table id='result_table' class="table table-bordered table-striped">
+            <colgroup>
+                <col align='left'/>
+                <col align='right'/>
+                <col align='right'/>
+                <col align='right'/>
+                <col align='right'/>
+                <col align='right'/>
+            </colgroup>
+            <tr id='header_row'>
+                <td>用例列表</td>
+                <td>Count</td>
+                <td>Pass</td>
+                <td>Fail</td>
+                <td>Error</td>
+            </tr>
+            {% for case in report_content %}
+            {% if case.result == "pass" %}
+            <tr class='passCase'>
+                <td>
+                    <div class='testcase'>{{case.case_name}}</div>
+                </td>
+                <td colspan='4' align='center'>pass</td>
+
+            </tr>
+            {% elif case.result == "fail" %}
+            <tr class='failCase'>
+                <td>
+                    <div class='testcase'>{{case.case_name}}</div>
+                </td>
+                <td colspan='4' align='center'>
+                    <a class='failCase' href="javascript:void(0);" onclick="showInfo(this)" href="">fail</a>
+                    <div class="popup_window">
+                        {% for step in case.step_list %}
+                        {% if step.result == "pass" %}
+                        <pre class="passCase">{{step.if_name}}      pass <br></pre>
+                        {% elif step.result == "fail" %}
+                        <pre class="failCase">{{step.if_name}}   {{step.msg}}
+                            <br></pre>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            {% elif case.result == "error" %}
+            <tr class='errorCase'>
+                <td>
+                    <div class='testcase'>{{case.case_name}}</div>
+                </td>
+                <td colspan='4' align='center'>
+                    <a class='errorCase' href="javascript:void(0);" onclick="showInfo(this)" href="">error</a>
+                    <div class="popup_window">
+                        {% for step in case.step_list %}
+                        {% if step.result == "pass" %}
+                        <pre class="passCase">{{step.if_name}}    pass <br></pre>
+                        {% elif step.result == "error" %}
+                        <pre class="errorCase">{{step.if_name}}    {{step.msg}}
+                            <br></pre>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+            <tr id='total_row'>
+                <td>Total</td>
+                <td id="total_case_num">{{report.case_num}}</td>
+                <td id="total_pass_num">{{report.pass_num}}</td>
+                <td id="total_fail_num">{{report.fail_num}}</td>
+                <td>0</td>
+            </tr>
+        </table>
+</div>
+</div>
+{% endblock %}

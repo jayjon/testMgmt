@@ -1,0 +1,97 @@
+{% extends "../base.html" %}
+
+{% block crumbs %}
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li>
+<!--                    <a href="/index">主页</a>-->
+                </li>
+                <li class="active">
+                    <a class="this-page">图片管理</a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+<!--                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">-->
+                <form action=" " method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                    <p>
+                        <label for="ph"></label> <input type="file" name="photo" id="ph"/>
+                    </p>
+                    <p>
+                        <label for="ua"></label> 图片名称: <input type="text" name="photo_name" id="ua"/>
+
+                        <label for="ph"></label> 图片描述信息:<input type="text" name="description" id="py"/>
+                        <!--                        <label for="ph"></label> 所属分类:<input type="text" name="category" id="cg"/>-->
+                    <div class="col-sm-6">
+                        <select name="pcl" class="form-control">
+                            {% for pcl in photo_category_list %}
+                            <option value={{ pcl.cate_id }}>{{ pcl.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <p>
+<!--                    <input type="submit" value="提交"/>-->
+                        <button  id="bt_submit">提交</button> |
+                        <button  id="bt_search">分类查询</button>
+                    </p>
+                    </p></form>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                        <th>头像</th>
+                        <th>点击次数</th>
+<!--                        <th>更新时间</th>-->
+                        <th>所属分类</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pic in photo_list %}
+                    <tr>
+                        <td>{{ pic.photo_id }}</td>
+                        <td>{{ pic.photo_name }}</td>
+                        <td>{{ pic.description }}</td>
+<!--                        <td><img style="width: 200px;" src="{{ MEDIA_URL }}{{ pic.photo }}"></td>-->
+                        <td><img style="width: 200px;" src="/static/{{pic.photo}}"></td>
+
+                        <td>{{ pic.click }}</td>
+<!--                        <td>{{ pic.content_time }}</td>-->
+                        <td>{{ pic.category_photo}}</td>
+                        <td>
+                            <a href="/base/photo_download?photo={{ pic.photo }}" class="layui-btn layui-btn-xs" lay-event="edit">下载</a>
+                            <a href="/base/photo_update?photo_id={{ pic.photo_id }}" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                            <a href="/base/photo_delete?photo_id={{ pic.photo_id }}" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/photo.js"></script>
+{% endblock %}

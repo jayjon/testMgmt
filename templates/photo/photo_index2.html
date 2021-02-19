@@ -1,0 +1,126 @@
+{% extends "../base.html" %}
+{% block body %}
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="tab-pane fade in active" id="channel">
+    <div class="div-width">
+        <div class="form-horizontal">
+            <center><h2>渠道管理</h2></center>
+            <button class="btn btn-warning" data-toggle="modal" id="addChannel" data-target="#channelModal">新增渠道</button>
+            <div class="form-group">
+                <table id="channel_list_table">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="channelModal" tabindex="-1" role="dialog" aria-labelledby="gridChannelModalChannel">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height: fit-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <center><h4 class="modal-title" id="myChannelModal" ></h4></center>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="formChannel">
+                    <input type="reset" hidden />
+                    <input type="hidden" name="channel_id" id="channel_id">
+                    <div class="form-group">
+                        <label for="channel_name" class="col-sm-3 control-label">合作方:</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" name="name" class="form-control" id="channel_name"
+                                   placeholder="请填写渠道名称, 限制为英文字母">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="channel_num" class="col-sm-3 control-label">渠道号:</label>
+                        <div class="col-sm-8">
+                            <input type="text" value="" name="name" class="form-control" id="channel_num"
+                                   placeholder="请输入渠道号">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick=saveChannel()>提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<!--<script src="/static/js/auto/fauto.js"></script>-->
+<script src="/static/js/channel/channel.js"></script>
+
+<script>
+        function saveChannel() {
+		    var channel_id = $("#channel_id").val();
+            if (channel_id > 0) {
+            editChannel();//执行调用修改数据保存方法
+        }
+            else{
+            insertChannel();//执行调用新增数据保存方法
+      }
+    }
+    </script>
+<script>
+         function insertChannel() {
+             var data = {
+                 "channel_name": $('#label_name').val(),
+                 "channel_num": $('#channel_num').val(),
+             };
+             console.log(data);
+             $.ajax({
+                 type: 'post',
+                 url: '/channel/addChannel',
+                 data: data,
+                 dataType: 'json',
+                 success: function () {
+                     window.location.reload();
+                 },
+                 error: function () {
+                     Alert.prototype.alertWarning("请填写全部数据")
+                 }
+             });
+         }
+    </script>
+<script>
+         function editChannel() {
+             var data = {
+                 "channel_id": $('#channel_id').val(),
+                 "channel_name": $('#channel_name').val(),
+                 "channel_num": $('#channel_num').val(),
+             };
+             console.log(data);
+             $.ajax({
+                 type: 'post',
+                 url: '/channel/editChannel',
+                 data: data,
+                 dataType: 'json',
+                 success: function () {
+                     window.location.reload();
+                 },
+                 error: function () {
+                     Alert.prototype.alertWarning("请填写全部数据")
+                 }
+             });
+         }
+    </script>
+<script>
+    $("#addChannel").on('click',function () {
+        $("#myChannelModal").text("新增渠道");
+        $("#formChannel")[0].reset();
+        $("#channel_id").val('');
+    })
+    </script>
+{% endblock %}
+
+
