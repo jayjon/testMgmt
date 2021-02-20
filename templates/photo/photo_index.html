@@ -75,7 +75,8 @@
 <!--                        <td>{{ pic.content_time }}</td>-->
                         <td>{{ pic.category_photo}}</td>
                         <td>
-                            <a href="/base/photo_download?photo={{ pic.photo }}" class="layui-btn layui-btn-xs" lay-event="edit">下载</a>
+                            <a href="/base/photo_click?photo_id={{ pic.photo_id }}" class="layui-btn layui-btn-xs" lay-event="click">点击</a>
+                            <a href="/base/photo_download?photo={{ pic.photo }}" class="layui-btn layui-btn-xs" lay-event="download">下载</a>
                             <a href="/base/photo_update?photo_id={{ pic.photo_id }}" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                             <a href="/base/photo_delete?photo_id={{ pic.photo_id }}" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                         </td>
@@ -93,5 +94,5 @@
 {% endblock %}
 
 {% block script %}
-<script src="/static/js/photo.js"></script>
+<!--<script src="/static/js/photo.js"></script>-->
 {% endblock %}

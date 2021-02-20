@@ -203,6 +203,19 @@ def photo_filter(request):
         c_list = Photo.objects.filter(category_photo=category)
         return render(request, "photo/category/photo_category_index.html", {"photo_category_list": c_list})
 
+# 图片点击次数方法,用于记录该图片的点击查看率
+def photo_click(request):
+    if request.method == 'GET':
+        pic_id = request.GET['photo_id']
+        print(pic_id)
+        # 先查出当前图片id下的点击次数
+        click_num_obj = Photo.objects.values('click').filter(photo_id=pic_id)
+        print("当前点击次数:", click_num_obj[0]['click'])
+        click_num = click_num_obj[0]['click']
+        # 更新点击次数
+        Photo.objects.filter(photo_id=pic_id).update(click=click_num+1)
+        return HttpResponseRedirect("/base/photo/")
+
 
 # 图片类目管理页面
 def photo_category_index(request):

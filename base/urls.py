@@ -35,6 +35,9 @@ urlpatterns = [
     url(r'/photo_update/', photo_update),
     url(r'/photo_delete/', photo_delete),
     url(r'/photo_download/', photo_download),
+    url(r'/photo_click/', photo_click),
+    url(r'/photo_filter/', photo_filter),
+
 
     url(r'/photo_category/', photo_category_index),
     url(r'/photo_category_add/', photo_category_add),

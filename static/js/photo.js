@@ -13,6 +13,7 @@ let Photo = function () {
 Photo.prototype = {
     init: function () {
            $('#bt_submit').click(function () {
+            console.log("sssss")
             let photo = $('#photo').val();
             let photo_name = $('#photo_name').val();
             let description = $('#description').val();
