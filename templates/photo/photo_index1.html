@@ -1,17 +1,6 @@
 {% extends "../base.html" %}
 
 {% block crumbs %}
-<title>Bootstrap 模板</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 引入 Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
-<!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
 <ul id='myTab' class="nav nav-tabs">
     <li class="active">
         <a href="#myTabContent" data-toggle="tab">
@@ -28,7 +17,7 @@
         <div class="panel">
             <div class="panel-heading">
 <!--                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">-->
-                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">
+                <form action=" " method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
                     <p>
@@ -48,8 +37,8 @@
                     </div>
                     <p>
 <!--                    <input type="submit" value="提交"/>-->
-                        <button class="btn btn-sm btn-success" id="bt_submit">提交</button> |
-                        <button class="btn btn-sm btn-success" id="bt_search">分类查询</button>
+                        <button  id="bt_submit" onclick="sub_upload()">提交</button> |
+                        <button  id="bt_search" onclick="search_category()">分类查询</button>
                     </p>
                     </p></form>
             </div>
@@ -98,9 +87,11 @@
 {% endblock %}
 
 {% block script %}
-<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
-<script src="https://code.jquery.com/jquery.js"></script>
-<!-- 包括所有已编译的插件 -->
-<script src="js/bootstrap.min.js"></script>
-<script src="/static/js/photo.js"></script>
+<!--<script src="../static/js/photo.js"></script>-->
+<script type="text/javascript">
+function sub_upload()
+{
+console.log('ssssssss')
+}
+</script>
 {% endblock %}

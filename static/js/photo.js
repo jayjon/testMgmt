@@ -2,7 +2,6 @@
  * Created by gaowei on 2021/01/25
  */
 
-
 $(document).ready(function () {
     let photo = new Photo();
     photo.init();
@@ -30,12 +29,12 @@ Photo.prototype = {
                 Alert.prototype.alertLoading();
                 $.ajax({
                     type: 'post',
-                    url: '/base/photo_upload/',
+                    url: '/photo_upload/',
                     // dataType: 'json',
                     data: param,
                     success: function (res) {
-                        $('#task_check_result').val(res);
-                        $('#service_list_table').bootstrapTable('refresh');
+//                        $('#task_check_result').val(res);
+//                        $('#service_list_table').bootstrapTable('refresh');
                         Alert.prototype.alertInfo(res)
                     }
                 });
