@@ -6,8 +6,6 @@
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
             <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a class="this" href="">图片管理</a>
                 <a class="this-page" href="">图片类目</a>
                 <a><cite>编辑</cite></a>
             </span>
@@ -18,22 +16,22 @@
                 <legend>图片类目编辑</legend>
             </fieldset>
             <form class="layui-form" action="/base/photo_category_update/" method="post">
-                <input name="cate_id" value ={{ pcl.cate_id }} hidden>
+                <input name="cate_id" value ={{photo_category_list.cate_id }} hidden>
                 <div class="layui-form-item">
                     <label class="layui-form-label">图片分类名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="category_name" value={{ pcl.category_name }}>
+                        <input type="text" name="category_name" value={{ photo_category_list.category_name }}>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">图片分类描述</label>
                     <div class="layui-input-block">
-                        <textarea name="description"  class="layui-textarea">{{ pcl.description }}</textarea>
+                        <textarea name="description"  class="layui-textarea">{{ photo_category_list.description }}</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
