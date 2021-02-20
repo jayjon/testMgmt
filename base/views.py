@@ -112,7 +112,10 @@ def sign_delete(request):
 
 # 图片显示页
 def photo_index(request):
-    photo_list = Photo.objects.all()
+
+    # photo_list = Photo.objects.all()
+    # 根据点击次数正序排列,正序输入"click",倒序输入"-click"
+    photo_list = Photo.objects.order_by('-click')
     photo_category_list = CategoryPhoto.objects.all()
     print("图片列表:", photo_list, "图片类目:", photo_category_list)
     return render(request, "photo/photo_index.html",
@@ -197,7 +200,7 @@ def photo_delete(request):
 
 def photo_filter(request):
     if request.method == 'GET':
-        cate_id = request.POST['pcl']
+        cate_id = request.GET['photo_category_id']
         print("cate_id:", cate_id)
         category = CategoryPhoto.objects.get(cate_id=cate_id)
         c_list = Photo.objects.filter(category_photo=category)
