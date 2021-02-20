@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+{% extends "../base.html" %}
+{% block body %}
+<ul id='myTab' class="nav nav-tabs">
+    <li class="active">
+        <a href="#myTabContent" data-toggle="tab">
+            图片管理列表
+        </a>
+    </li>
+</ul>
+<!-- 每个tab页对应的内容 -->
+<div class="tab-content">
+    <div id="myTabContent" class="tab-pane fade in active">
+        <div class="form-group">
+            <table id="photo_list_table">
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/photo.js"></script>
+{% endblock %}
+
+

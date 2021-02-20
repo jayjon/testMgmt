@@ -76,8 +76,8 @@ Photo.prototype = {
 
        },
     table: function () {
-        $('#service_list_table').bootstrapTable({
-            url: '/tools/getServiceTaskCheckist',
+        $('#photo_list_table').bootstrapTable({
+            url: '/photo_index/',
             method: 'get',
             // data: res,
             search: true,
@@ -93,28 +93,28 @@ Photo.prototype = {
             toolbar: '#tableToolbar',
             columns: [
                 {
-                    field: 'name',
-                    title: '操作人',
+                    field: 'photo_id',
+                    title: '图片id',
                     // width: '50%',
                 },
                 {
-                    field: 'user_mobile',
+                    field: 'photo_name',
                     title: '后台账号'
                 },
                 {
-                    field: 'env',
+                    field: 'photo',
                     title: '执行环境'
                 },
                 {
-                    field: 'commit',
+                    field: 'description',
                     title: '返回信息'
                 },
                 {
-                    field: 'create_time',
+                    field: 'click',
                     title: '执行时间'
                 },
                 {
-                    field: 'operate_name',
+                    field: 'category_photo_id',
                     title: '工具名称'
                 }
             ]
