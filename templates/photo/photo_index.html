@@ -19,8 +19,8 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
-                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">
-<!--                <form action=" " method="POST" enctype="multipart/form-data">-->
+<!--                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">-->
+                <form action=" " method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
                     <p>
@@ -32,17 +32,17 @@
                         <label for="ph"></label> 图片描述信息:<input type="text" name="description" id="py"/>
                         <!--                        <label for="ph"></label> 所属分类:<input type="text" name="category" id="cg"/>-->
                     <div class="col-sm-6">
-                        <select name="pcl" class="form-control">
+                        <select id=sc_id name="pcl" class="form-control">
                             {% for pcl in photo_category_list %}
                             <option value={{ pcl.cate_id }}>{{ pcl.category_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <p>
-                    <input type="submit" value="提交"/>
-<!--                        <button  id="bt_submit">提交</button> |-->
-                        <a href="/base/photo_filter?photo_category_id={{ pcl.cate_id }}" id="bt_search">分类查询</a>
-
+<!--                    <input type="submit" value="提交"/>-->
+                        <button  id="bt_submit">提交</button> |
+<!--                        <a href="/base/photo_filter?photo_category_id={{ pcl.cate_id }}" id="bt_search">分类查询</a>-->
+                            <a onclick="bt_search()">分类查询</a>
                     </p>
                     </p>
                 </form>
@@ -88,6 +88,21 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    function bt_search(){
+    console.log(111)
+    var cate_id = document.getElementById("sc_id")
+    for(i=0;i<cate_id.length;i++) {//下拉框的长度就是它的选项数.
+       if(cate_id[i].selected==true) {
+        var text=cate_id[i].text;//获取当前选择项的文本.
+        console.log(text)
+        }
+　　　　}
+    }
+</script>
+<!-- 包括所有已编译的插件 -->
+<!--<script src="/static/js/photo.js"></script>-->
 
 {% endblock %}
 
