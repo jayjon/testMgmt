@@ -42,7 +42,7 @@
 <!--                    <input type="submit" value="提交"/>-->
                         <button  id="bt_submit">提交</button> |
 <!--                        <a href="/base/photo_filter?photo_category_id={{ pcl.cate_id }}" id="bt_search">分类查询</a>-->
-                            <a onclick="bt_search()">分类查询</a>
+                            <button id="btn" onclick="bt_search()">分类查询</button>
                     </p>
                     </p>
                 </form>
@@ -97,6 +97,21 @@
        if(cate_id[i].selected==true) {
         var text=cate_id[i].text;//获取当前选择项的文本.
         console.log(text)
+        $.ajax({
+              url: '@Url.Action("/base/photo_filter/")',
+<!--              url:'/photo_filter/',-->
+              type: 'post',
+              data: text,
+              success: function(data) {
+                  if (data.code > 0) {
+                      alert('修改成功！');
+                      self.location = document.referrer;
+                  } else {
+                      alert(data.msg);
+                  }
+                  $('#btn').show();
+              }
+          });
         }
 　　　　}
     }

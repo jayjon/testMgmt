@@ -17,7 +17,7 @@
 			markCalss: "mailListHlignt", //高亮样式
 			zIndex: 1,
 			autoClass: true, //是否使用插件自带class样式
-			mailArr: ["foryou56.com"], //邮件数组
+			mailArr: ["XXXX.com"], //邮件数组
 			textHint: false, //文字提示的自动显示与隐藏
 			hintText: "",
 			focusColor: "#333",
