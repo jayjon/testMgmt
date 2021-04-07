@@ -1,5 +1,6 @@
 import os
 
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from EasyTest.settings import STATICFILES_DIRS
@@ -69,7 +70,25 @@ def project_delete(request):
     if request.method == 'GET':
         prj_id = request.GET['prj_id']
         Project.objects.filter(prj_id=prj_id).delete()
-        return HttpResponseRedirect("base/project/")
+
+
+def project_select(request):
+    if request.method == 'POST':
+        prj_name = request.POST['prj_name']
+        sign_id = request.POST['sign']
+        print("prj_name:", prj_name, type(prj_name),  "sign_id", sign_id)
+    try:
+        if prj_name and sign_id:
+            # 此处orm模糊查询写法字段名拼接__contains=输入的前缀单词
+            prj_list = Project.objects.filter(Q(prj_name__contains=prj_name) & Q(sign_id=sign_id))
+            print("prj_list:", prj_list)
+            return render(request, "base/project/index.html", {"prj_list": prj_list})
+        else:
+            return HttpResponseRedirect("base/project/")
+    except Exception as e:
+        print(e)
+    sign_list = Sign.objects.all()
+    return render(request, "base/project/search.html", {"sign_list": sign_list})
 
 
 # 加密方式增删改查

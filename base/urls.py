@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'/project_add/', project_add),
     url(r'/project_update/', project_update),
     url(r'/project_delete/', project_delete),
+    url(r'/project_select/', project_select),
+
 
     url(r'/sign/', sign_index),
     url(r'/sign_add/', sign_add),
