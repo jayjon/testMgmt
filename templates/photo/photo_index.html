@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block body %}
-
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
@@ -40,9 +39,8 @@
                     </div>
                     <p>
 <!--                    <input type="submit" value="提交"/>-->
-                        <button  id="bt_submit">提交</button> |
-<!--                        <a href="/base/photo_filter?photo_category_id={{ pcl.cate_id }}" id="bt_search">分类查询</a>-->
-                            <button id="btn" onclick="bt_search()">分类查询</button>
+                        <button  id="bt_submit" onclick="bt_submit()">提交</button> |
+                        <button  id="btn" onclick="bt_search()">分类查询</button>
                     </p>
                     </p>
                 </form>
@@ -89,34 +87,31 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
     function bt_search(){
-    console.log(111)
-    var cate_id = document.getElementById("sc_id")
+    console.log(111);
+    var cate_id = document.getElementById("sc_id");
     for(i=0;i<cate_id.length;i++) {//下拉框的长度就是它的选项数.
        if(cate_id[i].selected==true) {
-        var text=cate_id[i].text;//获取当前选择项的文本.
-        console.log(text)
+        var category_name=cate_id[i].text;//获取当前选择项的文本.
+        console.log(category_name);
         $.ajax({
-              url: '@Url.Action("/base/photo_filter/")',
-<!--              url:'/photo_filter/',-->
-              type: 'post',
-              data: text,
-              success: function(data) {
-                  if (data.code > 0) {
-                      alert('修改成功！');
-                      self.location = document.referrer;
-                  } else {
-                      alert(data.msg);
-                  }
-                  $('#btn').show();
-              }
-          });
+            type: "post",
+            url: "/base/photo_filter/",
+            data: {"category_name": category_name},
+            success: function (data) {
+                alert(data);
+            },
+            error: function () {
+                alert("执行失败");
+            }
+        });
         }
 　　　　}
     }
+
 </script>
-<!-- 包括所有已编译的插件 -->
+
 <!--<script src="/static/js/photo.js"></script>-->
 
 {% endblock %}

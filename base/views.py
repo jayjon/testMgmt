@@ -112,7 +112,6 @@ def sign_delete(request):
 
 # 图片显示页
 def photo_index(request):
-
     # photo_list = Photo.objects.all()
     # 根据点击次数正序排列,正序输入"click",倒序输入"-click"
     photo_list = Photo.objects.order_by('-click')
@@ -198,13 +197,26 @@ def photo_delete(request):
         Photo.objects.filter(photo_id=pic_id).delete()
         return HttpResponseRedirect("/base/photo/")
 
+
 def photo_filter(request):
-    if request.method == 'GET':
-        cate_id = request.GET['photo_category_id']
-        print("cate_id:", cate_id)
-        category = CategoryPhoto.objects.get(cate_id=cate_id)
-        c_list = Photo.objects.filter(category_photo=category)
-        return render(request, "photo/category/photo_category_index.html", {"photo_category_list": c_list})
+    if request.method == 'POST':
+        category_name = request.POST['category_name']
+        print("cate_name:", category_name)
+        # 通过类目查出类目id
+        cate_id = CategoryPhoto.objects.values("cate_id").filter(category_name=category_name)
+        print(cate_id[0]['cate_id'])
+        # 通过类目id表关联出所有的类目下图片
+        photo_list = Photo.objects.filter(category_photo_id=cate_id[0]['cate_id'])
+        # return HttpResponse("成功!!!")
+        return render(request, "photo/photo_index.html", {"photo_list": photo_list})
+
+
+def photo_table(request):
+    photo_list = Photo.objects.order_by('-click')
+    photo_category_list = CategoryPhoto.objects.all()
+    return render(request, "photo/photo_table_index.html",
+                  {"photo_list": photo_list, "photo_category_list": photo_category_list})
+
 
 # 图片点击次数方法,用于记录该图片的点击查看率
 def photo_click(request):
@@ -216,7 +228,7 @@ def photo_click(request):
         print("当前点击次数:", click_num_obj[0]['click'])
         click_num = click_num_obj[0]['click']
         # 更新点击次数
-        Photo.objects.filter(photo_id=pic_id).update(click=click_num+1)
+        Photo.objects.filter(photo_id=pic_id).update(click=click_num + 1)
         return HttpResponseRedirect("/base/photo/")
 
 

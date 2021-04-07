@@ -16,37 +16,8 @@
 {% block body %}
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <form action="/base/photo_upload/" method="POST" enctype="multipart/form-data">
-<!--                <form action=" " method="POST" enctype="multipart/form-data">-->
-
-                {% csrf_token %}
-                    <p>
-                        <label for="ph"></label> <input type="file" name="photo" id="ph"/>
-                    </p>
-                    <p>
-                        <label for="ua"></label> 图片名称: <input type="text" name="photo_name" id="ua"/>
-
-                        <label for="ph"></label> 图片描述信息:<input type="text" name="description" id="py"/>
-                        <!--                        <label for="ph"></label> 所属分类:<input type="text" name="category" id="cg"/>-->
-                    <div class="col-sm-6">
-                        <select name="pcl" class="form-control">
-                            {% for pcl in photo_category_list %}
-                            <option value={{ pcl.cate_id }}>{{ pcl.category_name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <p>
-                    <input type="submit" value="提交"/>
-<!--                        <button  id="bt_submit">提交</button> |-->
-                        <a href="/base/photo_filter?photo_category_id={{ pcl.cate_id }}" id="bt_search">分类查询</a>
-
-                    </p>
-                    </p>
-                </form>
-            </div>
+<!--    <div class="col-md-12">-->
+<!--        <div class="panel">-->
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>
@@ -84,9 +55,9 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+<!--        </div>-->
 
-    </div>
+<!--    </div>-->
 </div>
 
 {% endblock %}
