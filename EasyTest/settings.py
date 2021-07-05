@@ -94,14 +94,6 @@ DATABASES = {
 """
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'HOST': "127.0.0.1",
-    #     'NAME': "EasyTest",
-    #     'USER': "root",
-    #     'PASSWORD': "wsy",
-    #     'PORT': "3306",
-    # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
         'NAME': 'test',

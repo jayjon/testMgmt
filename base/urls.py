@@ -21,10 +21,10 @@ urlpatterns = [
 
     url(r'/project/', project_index),
     url(r'/project_add/', project_add),
+    url(r'/project_test_select/', project_test_select),
     url(r'/project_update/', project_update),
     url(r'/project_delete/', project_delete),
     url(r'/project_select/', project_select),
-
 
     url(r'/sign/', sign_index),
     url(r'/sign_add/', sign_add),
@@ -41,33 +41,27 @@ urlpatterns = [
     url(r'/photo_filter/', photo_filter),
     url(r'/photo_table/', photo_table),
 
-
     url(r'/photo_category/', photo_category_index),
     url(r'/photo_category_add/', photo_category_add),
     url(r'/photo_category_update/', photo_category_update),
     url(r'/photo_category_delete/', photo_category_delete),
     # url(r'/photo_category_list/', photo_category_select),
 
-
-
     url(r'/env/', env_index),
     url(r'/env_add/', env_add),
     url(r'/env_update/', env_update),
     url(r'/env_delete/', env_delete),
-
 
     url(r'/interface/', interface_index),
     url(r'/interface_add/', interface_add),
     url(r'/interface_update/', interface_update),
     url(r'/interface_delete/', interface_delete),
 
-
     url(r'/case/', case_index),
     url(r'/case_add/', case_add),
     url(r'/case_run/', case_run),
     url(r'/case_update/', case_update),
     url(r'/case_delete/', case_delete),
-
 
     url(r'/plan/', plan_index),
     url(r'/plan_add/', plan_add),
@@ -79,4 +73,3 @@ urlpatterns = [
 
     url(r'/findata/', findata)
 ]
-

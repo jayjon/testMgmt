@@ -2,6 +2,7 @@ import os
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_http_methods
 
 from EasyTest.settings import STATICFILES_DIRS
 from base import models
@@ -25,6 +26,20 @@ from lib.timeload import TimeLoad
 def project_index(request):
     prj_list = Project.objects.all()
     return render(request, "base/project/index.html", {"prj_list": prj_list})
+
+
+@require_http_methods(["GET"])
+def project_test_select(request):
+    response = {}
+    try:
+        prj_list = Project.objects.filter()
+        response['list'] = json.loads(serializers.serialize("json", prj_list))
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except Exception as e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+    return JsonResponse(response)
 
 
 def project_add(request):
@@ -76,7 +91,7 @@ def project_select(request):
     if request.method == 'POST':
         prj_name = request.POST['prj_name']
         sign_id = request.POST['sign']
-        print("prj_name:", prj_name, type(prj_name),  "sign_id", sign_id)
+        print("prj_name:", prj_name, type(prj_name), "sign_id", sign_id)
     try:
         if prj_name and sign_id:
             # 此处orm模糊查询写法字段名拼接__contains=输入的前缀单词
